@@ -1,6 +1,7 @@
 BINARY=generator
 GOARCH32=386
 GOARCH64=amd64
+GOARCH=arm64
 VERSION=v0.0.1
 
 all: linux solaris darwin windows vet fmt fmtcheck errcheck golint
@@ -32,6 +33,14 @@ darwin:
 	@rm ../darwin_${GOARCH64}/${BINARY} && echo 'DARWIN BINARY FOR amd64 ARCHITECTUR REMOVED SUCCESFULLY' || echo 'DARWIN BINARY FOR amd64 ARCHITECTUR WERE NOT REMOVED'
 	@echo 'BUILDING DARWIN BINARY FOR amd64 ARCHITECTURE'
 	@GOOS=darwin GOARCH=${GOARCH64} go build -o ../darwin_${GOARCH64}/${BINARY} \
+	-ldflags="-X main.Version=${VERSION}" &&  \
+        echo 'BUILD EXECUTED SUCCESSFULLY' || echo 'BUILD FAILED'
+
+arm64:
+	@echo
+	@rm ../linux_${GOARCH}/${BINARY} && echo 'ARM BINARY FOR amd64 ARCHITECTUR REMOVED SUCCESFULLY' || echo 'ARM BINARY FOR amd64 ARCHITECTUR WERE NOT REMOVED'
+	@echo 'BUILDING ARM BINARY FOR amd64 ARCHITECTURE'
+	@GOOS=linux GOARCH=${GOARCH} go build -o ../linux_${GOARCH}/${BINARY} \
 	-ldflags="-X main.Version=${VERSION}" &&  \
         echo 'BUILD EXECUTED SUCCESSFULLY' || echo 'BUILD FAILED'
 
