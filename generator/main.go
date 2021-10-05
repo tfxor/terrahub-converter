@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"./terraform"
+	"generator/terraform"
 )
 
 // VERSION is what is returned by the `-v` flag
